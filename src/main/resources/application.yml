@@ -1,0 +1,14 @@
+
+
+server:
+  port: 9000
+
+spring:
+  application:
+    name: userService
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: false
+    service-url:
+      defaultZone: http://192.168.0.12:8761/eureka
