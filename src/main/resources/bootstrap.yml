@@ -1,0 +1,8 @@
+#configrepo 가져오기
+
+spring:
+  cloud:
+    config:
+      uri: http://localhost:7070
+      name: config
+      profile: user

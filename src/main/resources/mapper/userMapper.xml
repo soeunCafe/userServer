@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.cafe.user.repository.UserMapper">
+    <select id="getUser" resultType="UserDto">
+        SELECT
+            id, userId, password, name, img
+        FROM
+            user
+    </select>
+    <select id="getUserById" resultType="UserDto" parameterType="UserDto">
+        SELECT
+            id, userId, password, name, img
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+    <select id="getUserByUserIdAndPassword" resultType="UserDto" parameterType="UserDto">
+        SELECT
+            id, userId, password, name, img
+        FROM
+            user
+        WHERE
+            id = #{id} AND password = #{password}
+    </select>
+    <insert id="postUser" parameterType="UserDto">
+        INSERT INTO
+            user(userId, img, name, password)
+        VALUES
+            (#{userId}, #{img}, #{name}, #{password})
+    </insert>
+    <delete id="deleteUserById" parameterType="UserDto">
+        DELETE FROM user
+        WHERE id = #{id}
+    </delete>
+    <update id="updateUserById" parameterType="UserDto">
+        UPDATE user
+        <set>
+            <if test="img!=null">img = #{img},</if>
+            <if test="name!=null">name = #{name},</if>
+            <if test="password!=null">password = #{password}</if>
+        </set>
+        WHERE
+        id = #{id}
+    </update>
+    <select id="loginUser" parameterType="UserDto" resultType="UserDto">
+        SELECT id, userId, password, name, img
+        From user
+        WHERE
+            userId = #{userId} AND password = #{password}
+    </select>
+    <select id="getUserByMe" resultType="UserDto" parameterType="UserDto">
+        SELECT
+            id, userId, name, img
+        FROM
+            user
+        WHERE
+            id = #{id}
+    </select>
+</mapper>
